@@ -19,7 +19,6 @@ const userManager = new UserManager_1.UserManager();
 const roomManager = new RoomManager_1.RoomManager();
 io.on("connection", (socket) => {
     console.log("New socket connected:", socket.id);
-    // Wait for user to register with a name
     socket.on("register_user", (name) => {
         console.log("User registering:", name, "with socket:", socket.id);
         userManager.addUser(name, socket);
@@ -28,14 +27,6 @@ io.on("connection", (socket) => {
         console.log("User disconnected:", socket.id);
         userManager.removeUser(socket.id);
     });
-    // Handle errors
-    socket.on("error", (error) => {
-        console.error("Socket error:", error);
-    });
-});
-// Handle server errors
-server.on("error", (error) => {
-    console.error("Server error:", error);
 });
 server.listen(3000, () => {
     console.log("listening on *:3000");

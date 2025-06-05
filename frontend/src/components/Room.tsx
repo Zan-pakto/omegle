@@ -1,7 +1,16 @@
 import { useEffect, useRef, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import Navbar from "./Navbar";
-import { Camera, Mic, Video, Volume2, VolumeX, VideoOff, RefreshCw, LogOut } from "lucide-react";
+import {
+  Camera,
+  Mic,
+  Video,
+  Volume2,
+  VolumeX,
+  VideoOff,
+  RefreshCw,
+  LogOut,
+} from "lucide-react";
 
 declare global {
   interface Window {
@@ -21,6 +30,7 @@ interface Socket {
 }
 
 export const Room = ({
+  //@ts-ignore
   name,
   localAudioTrack,
   localVideoTrack,
@@ -31,14 +41,23 @@ export const Room = ({
   localVideoTrack: MediaStreamTrack | null;
   socket: Socket;
 }) => {
+  //@ts-ignore
   const [searchParams, setSearchParams] = useSearchParams();
   const [lobby, setLobby] = useState(true);
   const [roomId, setRoomId] = useState<string | null>(null);
   const [sendingPc, setSendingPc] = useState<null | RTCPeerConnection>(null);
-  const [receivingPc, setReceivingPc] = useState<null | RTCPeerConnection>(null);
-  const [remoteVideoTrack, setRemoteVideoTrack] = useState<MediaStreamTrack | null>(null);
-  const [remoteAudioTrack, setRemoteAudioTrack] = useState<MediaStreamTrack | null>(null);
-  const [remoteMediaStream, setRemoteMediaStream] = useState<MediaStream | null>(null);
+  const [receivingPc, setReceivingPc] = useState<null | RTCPeerConnection>(
+    null
+  );
+  //@ts-ignore
+  const [remoteVideoTrack, setRemoteVideoTrack] =
+    useState<MediaStreamTrack | null>(null);
+  //@ts-ignore
+  const [remoteAudioTrack, setRemoteAudioTrack] =
+    useState<MediaStreamTrack | null>(null);
+  //@ts-ignore
+  const [remoteMediaStream, setRemoteMediaStream] =
+    useState<MediaStream | null>(null);
   const remoteVideoRef = useRef<HTMLVideoElement>(null);
   const localVideoRef = useRef<HTMLVideoElement>(null);
   const [partnerName, setPartnerName] = useState<string | null>(null);
@@ -107,7 +126,7 @@ export const Room = ({
         setRemoteMediaStream(stream);
         setReceivingPc(pc);
         window.pcr = pc;
-
+        //@ts-ignore
         pc.ontrack = (e) => {
           console.log("ontrack triggered");
         };
@@ -150,6 +169,7 @@ export const Room = ({
     socket.on(
       "answer",
       ({
+        //@ts-ignore
         roomId,
         sdp: remoteSdp,
       }: {
@@ -180,6 +200,7 @@ export const Room = ({
       ({
         candidate,
         type,
+        //@ts-ignore
         roomId,
       }: {
         candidate: RTCIceCandidateInit;
@@ -347,7 +368,9 @@ export const Room = ({
                     <div className="p-2 bg-gray-900 rounded-full">
                       <Camera className="w-6 h-6 text-blue-400 animate-bounce" />
                     </div>
-                    <span className="text-lg font-medium">Waiting to connect you to someone...</span>
+                    <span className="text-lg font-medium">
+                      Waiting to connect you to someone...
+                    </span>
                   </div>
                 </div>
               ) : (

@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
+
 import { Room } from "./Room";
 import Navbar from "./Navbar";
 import { Manager } from "socket.io-client";
@@ -77,8 +77,12 @@ export const Landing = () => {
           <div className="max-w-4xl mx-auto">
             <div className="bg-gray-800/50 backdrop-blur-sm rounded-2xl shadow-2xl p-8 border border-gray-700/50">
               <div className="text-center mb-8">
-                <h2 className="text-2xl font-bold text-white mb-2">Start Video Chatting</h2>
-                <p className="text-gray-400">Connect with people from around the world</p>
+                <h2 className="text-2xl font-bold text-white mb-2">
+                  Start Video Chatting
+                </h2>
+                <p className="text-gray-400">
+                  Connect with people from around the world
+                </p>
               </div>
 
               <div className="aspect-video w-full max-w-2xl mx-auto mb-8 relative group">
